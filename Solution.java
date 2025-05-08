@@ -1,5 +1,4 @@
-import java.util.Stack;
-
+import java.util.*;
 class Solution {
     public int longestValidParentheses(String s) {
         Stack<Integer> stack = new Stack<>();
@@ -8,6 +7,16 @@ class Solution {
 
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '(') {
-…        return maxLength;
+                 stack.push(i);
+            } else {
+                stack.pop();
+                if (stack.isEmpty()) {
+                    stack.push(i);
+                } else {
+                    maxLength = Math.max(maxLength, i - stack.peek());
+                }
+            }
+        }
+        return maxLength;
     }
 }
